@@ -157,7 +157,7 @@ load_atp_matches <- function(
 
   years <- start_year:end_year
   urls <- paste0(
-    "https://raw.githubusercontent.com/JeffSackmann/tennis_atp/master/atp_matches_",
+    "https://raw.githubusercontent.com/Kadantte/tennis_atp/master/atp_matches_",
     years,
     ".csv"
   )
