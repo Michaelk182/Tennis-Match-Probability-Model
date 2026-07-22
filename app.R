@@ -2334,12 +2334,22 @@ launch_tennis_shiny_app <- function(
     tibble()
   }
 
-  message("Building current prediction state...")
-  model_state <- build_current_model_state(
-    matches = matches,
-    charting_profiles = charting_profiles,
-    progress_every = 1000
-  )
+  state_cache_file <- "model_state.rds"
+  
+  if (file.exists(state_cache_file)) {
+    message("Loading cached prediction state...")
+    model_state <- readRDS(state_cache_file)
+  } else {
+    message("Building current prediction state...")
+    
+    model_state <- build_current_model_state(
+      matches = matches,
+      charting_profiles = charting_profiles,
+      progress_every = 1000
+    )
+    
+    saveRDS(model_state, state_cache_file)
+  }
 
   player_counts <- tibble(
     player = names(model_state$match_n),
